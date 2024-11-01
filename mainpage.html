@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>VIRUS</title>
+  <style>
+    #set {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(blue, red);
+      color: white;
+    }
+
+    .card {
+      margin: 10px;
+    }
+
+    .card-body,
+    th,
+    tr,
+    td {
+      background: linear-gradient(red, red);
+
+
+    }
+
+    p,
+    h4 {
+      color: white;
+    }
+
+    input {
+      height: 50px;
+    }
+
+    .text {
+      margin-right: 20px;
+      /* Space between text and image */
+      align-items: center;
+    }
+
+    .img-size {
+      max-width: 70%;
+      height: 120%;
+
+      margin: 0;
+      padding: 0;
+
+    }
+  </style>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/jquery-ui-1.14.0.custom/jquery-ui.css">
+  <link rel="stylesheet" href="/jquery-ui-1.14.0.custom/jquery-ui.min.css">
+  <link rel="stylesheet" href="/jquery-ui-1.14.0.custom/jquery-ui.structure.css">
+  <link rel="stylesheet" href="/jquery-ui-1.14.0.custom/jquery-ui.structure.min.css">
+  <link rel="stylesheet" href="/jquery-ui-1.14.0.custom/jquery-ui.theme.css">
+  <link rel="stylesheet" href="/jquery-ui-1.14.0.custom/jquery-ui.theme.min.css">
+
+
+
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="bootstrap" viewBox="0 0 118 94">
+      <title>Bootstrap</title>
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z">
+      </path>
+    </symbol>
+    <symbol id="facebook" viewBox="0 0 16 16">
+      <path
+        d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z">
+      </path>
+    </symbol>
+    <symbol id="instagram" viewBox="0 0 16 16">
+      <path
+        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z">
+      </path>
+    </symbol>
+    <symbol id="twitter" viewBox="0 0 16 16">
+      <path
+        d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+      </path>
+    </symbol>
+  </svg>
+  <header>
+    <!-- place navbar here -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-primary">
+      <div class="container" style="color: black;">
+        <a class="navbar-brand fs-2 fw-bold" href="#"> <img src="image virus/imgcov.png" alt="logo"
+            style="height: 40px;"> Virology</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link fs-5 fw-bold" href="#home" aria-current="page">Home
+                <span class="visually-hidden">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-5 fw-bold" href="#aboutus">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fs-5 fw-bold" href="#table">Year Wise Listing</a>
+              <!-- <div
+                                  class="dropdown-menu"
+                                  aria-labelledby="dropdownId"
+                              >
+                                  <a class="dropdown-item" href="#dna">DNA viruses</a>
+                                  <a class="dropdown-item" href="#rna">RNA viruses</a>
+                                  <a class="dropdown-item" href="#RT">Reverse transcribing viruses</a>
+                                  
+                              </div> -->
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fs-5 fw-bold" href="#" id="dropdownId1" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Types of Viruses</a>
+              <div class="dropdown-menu" aria-labelledby="dropdownId1">
+                <a class="dropdown-item" href="#covid">Coronavirus</a>
+                <a class="dropdown-item" href="#ortho">Orthopoxvirus</a>
+                <a class="dropdown-item" href="#herpe">Herpesviruses</a>
+                <a class="dropdown-item" href="#onco">Oncoviruses</a>
+                <a class="dropdown-item" href="#enter">Enterovirus</a>
+
+              </div>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link fs-5 fw-bold" href="#contactus">Contact Us</a>
+            </li>
+          </ul>
+          <form class="d-flex my-2 my-lg-0">
+            <input class="form-control sm-2" id="virus" type="text" placeholder="Search" />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="func()">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <!-- carusal section -->
+    <div>
+      <div id="carouselId" class="carousel slide" data-bs-ride="carousel" style=" display: flex;
+                      align-items: center;
+                      background: linear-gradient(blue, red); 
+                      color: white;">
+        <section id="home">
+          <ol class="carousel-indicators">
+            <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true"
+              aria-label="First slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="2" aria-label="Third slide"></li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <div class="container-fluid" id="set">
+                <div class="text">
+                  <h1 class="fw-bold">VIRUS</h1>
+                  <p>
+                  <h3>A virus is an infectious microbe consisting of a segment of nucleic acid (either DNA or RNA)
+                    surrounded by a protein coat.</h3>
+                  </p>
+                </div>
+                <img src="image virus/virus.png" style="height: 700px; width: 200vw;" class="img-size"
+                  alt="profile of viruses">
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container-fluid" id="set">
+                <div class="text">
+                  <h1 class="fw-bold">STRUCTURE VIRUSES</h1>
+                  <p>
+                  <ul>
+                    <li>
+                      <h2>NUCLEIC ACID</h2> : The genetic material (RNA or DNA) found within the inner core.
+                    </li>
+                    <li>
+                      <h2>CAPSID</h2> : A protein layer or covering that forms a shell enclosing the genetic material.
+                    </li>
+                    <li>
+                      <h2>ENVELOPE</h2> Envelope: Many viruses have a lipoprotein bilayer that encloses the capsid.
+                    </li>
+                  </ul>
+                  </p>
+                </div>
+                <img src="image virus/Virus-Structure-Diagram-removebg-preview.png"
+                  style="height: 700px; width: 200vw;" class="img-size" alt="profile of viruses">
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container-fluid" id="set">
+                <div class="text">
+                  <h1 class="fw-bold">TYPES OF VIRUSES</h1>
+                  <p> Experts group viruses into categories — like family and genus — based on similar features, like
+                    size, shape and the type of genetic material they carry. Some common types of viruses that you might
+                    hear about include:
+                  <ul>
+                    <h3>
+                      <li>Influenza viruses.</li>
+                      <li>Human herpesviruses.</li>
+                      <li>Coronavirus.</li>
+                      <li>Human papillomaviruses.</li>
+                      <li>Enteroviruses.</li>
+                      <li>Flaviviruses.</li>
+                      <li>Orthopoxviruses.</li>
+                      <li>Hepatitis viruses.</li>
+                    </h3>
+                  </ul>
+
+                  There are also some viruses that have unique qualities, like retroviruses and oncoviruses.</p>
+                </div>
+                <img src="image virus/type-removebg-preview.png" style="height: 700px; width: 200vw;" class="img-size"
+                  alt="profile of viruses">
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </section>
+      </div>
+    </div>
+    <!-- Covid -->
+    <div id="covid" style="background: linear-gradient(red,blue); color: white; margin: 0; padding: 10px;">
+
+      <section id="types">
+        <h1 class="text-center mt-3">CORONAVIRUS / SARS-COV-2</h1>
+        <div>
+          <div class="card-group">
+            <div class="card">
+              <img src="image virus/covid.webp" class="card-img-top" alt="..." height="60%">
+              <div class="card-body">
+                <h5 class="card-title" style="color: white;">History</h5>
+                <p class="card-text">Coronavirus disease 2019 (COVID-19) is a contagious disease caused by the
+                  coronavirus SARS-CoV-2. The first known case was identified in Wuhan, China, in December 2019. Most
+                  scientists believe the SARS-CoV-2 virus entered into human populations through natural zoonosis,
+                  similar to the SARS-CoV-1 and MERS-CoV outbreaks, and consistent with other pandemics in human
+                  history. Social and environmental factors including climate change, natural ecosystem destruction and
+                  wildlife trade increased the likelihood of such zoonotic spillover. The disease quickly spread
+                  worldwide, resulting in the COVID-19 pandemic.</p>
+              </div>
+
+            </div>
+            <div class="card">
+              <img src="image virus/sym-covid.png" class="card-img-top" style="margin: 0; padding: 0;" alt="..."
+                height="60%">
+              <div class="card-body">
+                <h5 class="card-title" style="color: white;">Symptom</h5>
+                <p class="card-text">Typical COVID-19 symptoms often show up 2 to 14 days after contact with the virus.
+                <div class="row">
+                  <div class="col-6" style="color: white;">
+                    <li>Dry cough</li>
+                    <li>Extreme tiredness</li>
+                    <li>Fever/chills.</li>
+                    <li>Cold-like symptoms such as congestion, runny nose/sore throat.</li>
+                  </div>
+                  <div class="col-6" style="color: white;">
+                    <li>Shortness of breath.</li>
+                    <li>Loss of taste/smell.</li>
+                    <li>Pain, such as headaches and body.</li>
+                    <li>Digestive/Upset stomach, called diarrhea</li>
+                  </div>
+                </div>
+
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="image virus/covid vaccine.jpeg" class="card-img-top" alt="..." height="60%">
+              <div class="card-body">
+                <h5 class="card-title" style="color: white;">Treatment</h5>
+                <p class="card-text">The U.S. Food and Drug Administration has approved drug treatments for COVID-19 and
+                  has authorized others for emergency use. In addition, more therapies are being tested in clinical
+                  trials to evaluate whether they are safe and effective in treating COVID-19.</p>
+                <p class="card-text">Rest, plenty of fluids, and symptom management.
+                  Over-the-counter medicine like fever reducers and pain relievers.
+                  Separate bathroom use if possible.
+                  Seek medical help if you have trouble breathing.
+                  Home testing kits are available.
+                  FDA-approved drug treatments and clinical trials.
+                  Vaccination is essential.</p>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+    <!--ORTHOPOXVIRUS -->
+    <div style="background: linear-gradient(red,blue); color: white; margin: 0; padding: 10px;"">
+                    <section id=" types">
+      <h1 id="ortho" class="text-center mt-3">ORTHOPOXVIRUS</h1>
+      <div class="container-fluid mt-3">
+        <div class="card-group">
+          <div class="card">
+            <img src="image virus/ortho1.webp" class="card-img-top" alt="..." height="70%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Definition</h5>
+              <p class="card-text">Orthopoxvirus is a genus of viruses in the family Poxviridae and subfamily
+                Chordopoxvirinae. Vertebrates, including mammals and humans, and arthropods serve as natural hosts.
+                There are 12 species in this genus. Diseases associated with this genus include smallpox, cowpox,
+                horsepox, camelpox, and mpox.[1][2] The most widely known member of the genus is Variola virus, which
+                causes smallpox. It was eradicated globally by 1977, through the use of Vaccinia virus as a vaccine. The
+                most recently described species is the Alaskapox virus, first isolated in 2015.</p>
+            </div>
+
+          </div>
+          <div class="card">
+            <img src="image virus/ortho2.webp" class="card-img-top" alt="..." height="80%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Symptom</h5>
+              <p class="card-text ">If you have an orthopoxvirus, a raised, well-defined, bumpy rash is usually the most
+                recognizable symptom. The rash goes through several stages, starting out flat, becoming raised (papules)
+                and fluid-filled (vesicles), and then, finally crusting over. This happens over a few weeks. The rash is
+                sometimes painful and itchy. Depending on the virus, it can show up in different places on your body.
+                You might have a rash on your:
+                Hands, especially your palms.
+                Soles of your feet.
+                Anus (butthole).
+                Genitals (penis or vagina).
+                Other symptoms of orthopoxviruses include:
+                Muscle aches.
+                Swollen lymph nodes.</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="image virus/ortho3.jpg" class="card-img-top" alt="..." height="60%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Treatment</h5>
+              <p class="card-text">Healthcare providers don’t often treat orthopoxviruses, unless you’re very sick.
+                Sometimes, they treat orthopoxviruses like mpox with antiviral medications created to treat smallpox.
+                Vaccinia immune globulin (VIG-IV), a type of antibody treatment, is also sometimes an option.</p>
+              <p class="card-text">You can get vaccinated against some orthopoxviruses if you’re at high risk of being
+                exposed to one. Vaccines are available for mpox and smallpox..</p>
+
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Herpesviruses -->
+    <div style="background: linear-gradient(red,blue); color: white; margin: 0; padding: 10px;"">
+                    <section id=" types">
+      <h1 id="herpe" class="text-center mt-3">HERPESVIRUSES</h1>
+      <div class="container-fluid mt-4">
+        <div class="card-group">
+          <div class="card">
+            <img src="image virus/herp1.jpeg" class="card-img-top" alt="..." height="50%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Definition</h5>
+              <p class="card-text">Herpesviridae is a large family of DNA viruses that cause infections and certain
+                diseases in animals, including humans.The members of this family are also known as herpesviruses. The
+                family name is derived from the Greek word ἕρπειν (herpein 'to creep'), referring to spreading cutaneous
+                lesions, usually involving blisters, seen in flares of herpes simplex , herpes simplex and herpes zoster
+                (shingles). In 1971, the International Committee on the Taxonomy of Viruses (ICTV) established
+                Herpesvirus as a genus with 23 viruses among four groups.As of 2020, 115 species are recognized, all but
+                one of which are in one of the three subfamilies. Herpesviruses can cause both latent and lytic
+                infections</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="image virus/herp2.png" class="card-img-top" alt="..." height="50%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Symptom</h5>
+              <p class="card-text" style="color: white;">The symptoms of an HSV infection vary according to the specific
+                type of infection:
+              <P>
+                <li style="color: white;">Blisters on your lips or around your mouth.Skin may tingle.</li>
+                <li style="color: white;">Blisters on and around your genitals.Before blisters appearing fever,
+                  headache, swollen lymph nodes and itching or tingling in your genital area.</li>
+                <li style="color: white;">Blisters anywhere on your skin, fingers, eyelids or around your eyes.</li>
+                <li style="color: white;">Headache, fever, focal seizures, changes in speech or behavior, sensitivity to
+                  light.</li>
+              </P>
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="image virus/hrep3-removebg-preview.png" class="card-img-top" alt="..." height="50%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Treatment</h5>
+              <p class="card-text "> <b>Initial treatment</b> <br>
+                When you first get a herpes diagnosis and have symptoms of an active infection, a brief 7- to 10-day
+                course of antiviral therapy is usually prescribed.</p>
+              <p class="card-text"><b>Intermittent treatment</b>
+                Once your symptoms go away after the initial treatment, your doctor may recommend intermittent therapy.
+                This is when you keep medication on hand to treat a flare-up. You’ll have to consult with your
+                healthcare professional to see whether intermittent therapy is right for you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Oncoviruses -->
+    <div style="background: linear-gradient(red,blue); color: white; margin: 0; padding: 10px;"">
+                      <section id=" types">
+      <h1 id="onco" class="text-center mt-3">ONCOVIRUSES</h1>
+      <div class="container-fluid mt-2">
+        <div class="card-group">
+          <div class="card">
+            <img src="image virus/onco1.jpg" class="card-img-top" alt="..." height="60%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Definition</h5>
+              <p class="card-text">An oncovirus/oncogenic virus is cause cancer.This term originated from studies of
+                acutely transforming retroviruses in the 1950–60s,when the term oncornaviruses was used to denote their
+                RNA virus origin.With the letters RNA removed, it now refers to any virus with a DNA or RNA genome
+                causing cancer and is synonymous with tumor virus or cancer virus.Oncoviruses have been important not
+                only in epidemiology, but also in investigations of cell cycle control mechanisms such as the
+                retinoblastoma protein. </p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="image virus/onco2.png" class="card-img-top" alt="..." height="60%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Symptom</h5>
+              <p class="card-text">Here are some symptoms:
+                Human Papillomavirus (HPV):
+                it can lead to cervical, anal, and throat cancers.
+                Hepatitis B and C Viruses:
+                it can lead to liver disease, cirrhosis, and hepatocellular carcinoma. Acute symptoms fatigue, jaundice,
+                and abdominal pain.
+                Epstein-Barr Virus (EBV):
+                Symptoms: Often causes infectious mononucleosis (fever, sore throat, swollen lymph nodes).
+                Human Immunodeficiency Virus (HIV):
+                Early symptoms can include flu-like symptoms, fatigue, and swollen lymph nodes.
+                Kaposi's Sarcoma-Associated Herpesvirus (KSHV):
+                lesions on the skin, in the mouth, or other organs.
+                Merkel Cell Polyomavirus (MCPyV):
+                fast-growing nodule on the skin..</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="image virus/onco3.jpg" class="card-img-top" alt="..." height="58%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Treatment</h5>
+              <p class="card-text">You can take steps to reduce your risk of getting oncoviruses.
+
+                Get vaccinated. vaccine can help reduce risk of HPV-related cancer & also liver cancer risk.
+                Get screened. Screening is available for some cancer-related viruses, like HPV, HIV and hepatitis B and
+                C. Screening is one of the best ways to catch cancer early, when it’s easiest to treat.
+                Practice safe sex. Viruses like HPV, HIV, hepatitis B and C are sexually transmitted.
+                Don’t use illegal drugs, share syringes, needles or other infected equipment or personal items that
+                might have blood on them.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Enterovirus -->
+    <div style="background: linear-gradient(red,blue); color: white; margin: 0; padding: 10px;"">
+                      <section id=" types">
+      <h1 id="enter" class="text-center mt-3">ENTEROVIRUS</h1>
+      <div class="container-fluid mt-2">
+        <div class="card-group">
+          <div class="card">
+            <img src="image virus/Entero-virous.png" class="card-img-top" alt="..." height="60%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Definition</h5>
+              <p class="card-text">.Enterovirus is a genus of positive-sense single-stranded RNA viruses associated with
+                several human and mammalian diseases. Enteroviruses are named by their transmission-route through the
+                intestine ('enteric' meaning intestinal).</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="image virus/Entero-syptoms-removebg-preview.png" class="card-img-top" alt="..." height="60%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Symptom</h5>
+              <p class="card-text">Most people who contract enterovirus have mild symptoms lasting about a week. Those
+                with higher risk may have more complications, sometimes becoming fatal.[61] The most common sign of
+                enterovirus is a common cold. More intense symptoms of enterovirus include hypoxia, aseptic meningitis,
+                conjunctivitis, hand, foot and mouth disease, and paralysis..</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="image virus/Entero-treatment.png" class="card-img-top" alt="..." height="60%">
+            <div class="card-body">
+              <h5 class="card-title" style="color: white;">Treatment</h5>
+              <p class="card-text"> In cases of pleurodynia, treatment consists of analgesics to relieve the severe pain
+                that occurs in patients with the disease; in some severe cases, opiates may be needed. Treatment for
+                aseptic meningitis caused by enteroviruses is also mainly symptomatic. In patients with enteroviral
+                carditis, treatment consists of the prevention and treatment of complications such as arrhythmias,
+                pericardial effusion, and cardiac failure. Other treatments that have been investigated for enteroviral
+                carditis include intravenous immunoglobulin.</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Table section 4 -->
+    <div class="container-fluid" style="background: linear-gradient(blue, red); " <div class="table-responsive">
+      <h1 class="text-center fs-1">Year Wise Listing</h1>
+      <table class="table table-primary">
+        <thead style="color: white;">
+          <tr>
+            <th colspan="7" id="table" class="text-center">Epidemics and pandemics with at least 1 million deaths</th>
+          </tr>
+          <tr class="fs-4">
+            <th scope="col">Rank</th>
+            <th scope="col">Epidemics/Pandemics</th>
+            <th scope="col">Disease</th>
+            <th scope="col">Death toll</th>
+            <th scope="col">Percentage of Population Lost</th>
+            <th scope="col">Years</th>
+            <th scope="col">Location</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+          <tr class="fs-5">
+            <td scope="row">1</td>
+            <td>Spanish flu</td>
+            <td>Influenza A/H1N1</td>
+            <td>17-100 million</td>
+            <td>1-5.4% of global population[5]</td>
+            <td>1918-1920</td>
+            <td>Worldwide</td>
+          </tr>
+          <tr class="fs-5">
+            <td scope="row">2</td>
+            <td>Plague of Justinian</td>
+            <td>Bubonic plague</td>
+            <td>15-100 million</td>
+            <td>25-60% of European population[6]</td>
+            <td>541-549</td>
+            <td>North Africa, Europe, and Western Asia</td>
+          </tr>
+          <tr class="fs-5">
+            <td scope="row">3</td>
+            <td>Black Death</td>
+            <td>Bubonic plague</td>
+            <td>15-100 million</td>
+            <td>30-60% of European population</td>
+            <td>1346-1353</td>
+            <td>Europe, Asia, and North Africa</td>
+          </tr>
+          <tr class="fs-5">
+            <td scope="row">4</td>
+            <td>HIV/AIDS pandemic</td>
+            <td>HIV/AIDS</td>
+            <td>43 million (as of 2024)</td>
+            <td>outpaced the death rate significantly during the period of this pandemic.</td>
+            <td>1981-present</td>
+            <td>Worldwide</td>
+          </tr>
+          <tr class="fs-5">
+            <td scope="row">5</td>
+            <td>COVID-19 pandemic</td>
+            <td>COVID-19</td>
+            <td>7-35 million (as of 2024)</td>
+            <td>outpaced the death rate significantly during the period of this pandemic.</td>
+            <td>2019-present</td>
+            <td>Worldwide</td>
+          </tr>
+          <tr class="fs-5">
+            <td scope="row">6</td>
+            <td>Third plague pandemic</td>
+            <td>Bubonic plague</td>
+            <td>12-15 million</td>
+            <td>---</td>
+            <td>1855-1960</td>
+            <td>Worldwide</td>
+          </tr>
+          <tr class="fs-5">
+            <td scope="row">7</td>
+            <td>Cocoliztli epidemic of 1545-1548</td>
+            <td>Cocoliztli, caused by an unidentified pathogen</td>
+            <td>5-15 million</td>
+            <td>27-80% of Mexican population[</td>
+            <td>1545-1548</td>
+            <td>Mexico</td>
+          </tr>
+          <tr class="fs-5">
+            <td scope="row">8</td>
+            <td>Antonine Plague</td>
+            <td>Smallpox or measles</td>
+            <td>5-10 million</td>
+            <td>25-33% of Roman population</td>
+            <td>165-180 (possibly up to 190)</td>
+            <td>Roman Empire</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+
+    <div class="row g-0" id="dna" style="max-width:100%; background: linear-gradient(blue, red);">
+      <div class="col-md-6">
+        <img src="image virus/OIP__2_-removebg-preview (1).png" width="100%" alt="...">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body" style="height: 680px;">
+          <h5 class="card-title fs-1 ms-5">DNA Viruses</h5>
+          <p class="card-text mt-5 ms-5 fs-4">Viruses with a DNA genome, except for the DNA reverse transcribing
+            viruses, are members of three of the four recognized viral realms: Duplodnaviria, Monodnaviria, and
+            Varidnaviria. But the incertae sedis order Ligamenvirales, and many other incertae sedis families and
+            genera, are also used to classify DNA viruses. The domains Duplodnaviria and Varidnaviria consist of
+            double-stranded DNA viruses; other double-stranded DNA viruses are incertae sedis. The domain Monodnaviria
+            consists of single-stranded DNA viruses that generally encode a HUH endonuclease; other single-stranded DNA
+            viruses are incertae sedis.
+            Group I: viruses possess double-stranded DNA. Viruses that cause chickenpox and herpes are found here.
+            Group II: viruses possess single-stranded DNA.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ------------------------------------- -->
+    <div style="max-width: 100%;" id="rna">
+      <div class="row g-0">
+        <div class="col-md-6" style="background: linear-gradient(blue, red);">
+          <div class="card-body">
+            <h5 class="card-title fs-1 ms-5">RNA Viruses</h5>
+            <p class="card-text mt-4 ms-5 fs-4">All viruses that have an RNA genome, and that encode an RNA-dependent
+              RNA polymerase (RdRp), are members of the kingdom Orthornavirae, within the realm Riboviria.[16]
+
+              Group III: viruses possess double-stranded RNA genomes, e.g. rotavirus.
+              Group IV: viruses possess positive-sense single-stranded RNA genomes. Many well known viruses are found in
+              this group, including the picornaviruses (which is a family of viruses that includes well-known viruses
+              like Hepatitis A virus, enteroviruses, rhinoviruses, poliovirus, and foot-and-mouth virus), SARS virus,
+              hepatitis C virus, yellow fever virus, and rubella virus.
+              Group V: viruses possess negative-sense single-stranded RNA genomes. Ebola and Marburg viruses are well
+              known members of this group, along with influenza virus, measles, mumps and rabies.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <img src="image virus/rna.jpeg" width="100%" alt="...">
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- place footer here -->
+    <!-- section  About Us -->
+    <section id="aboutus">
+      <div class="pt-5" style="background: linear-gradient(blue,red);">
+        <h1 class="text-center mt-1">ABOUT US</h1>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card" style="border: 0px solid black;">
+              <div class="card-body" style="background: linear-gradient(blue,rgb(225, 0, 255));">
+                <h3 class="card-title">Our Mission</h3>
+                <p class="card-text">
+                <h5 style="color: white;">Our mission is simple yet profound: to demystify viruses and promote
+                  understanding. We believe that knowledge is power, and by equipping people with the right information,
+                  we can help foster a healthier, informed community. Whether you’re looking for information on specific
+                  viruses, preventive strategies, or the latest research, we are here to guide you. It is our pleasure
+                </h5>
+                </p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card" style="border: 0px solid black;">
+              <div class="card-body" style="background: linear-gradient(blue,rgb(225, 0, 255))" ;>
+                <h3 class="card-title"> Why It Matters</h3>
+                <p class="card-text">
+                <h5 style="color: white;"> Informed individuals make healthier choices, leading to better outcomes for
+                  themselves and their communities. By raising awareness and providing reliable information, we hope to
+                  empower everyone to take proactive steps in their health journeyswe can build a more informed society
+                  and promote better health for all. Thank you for being part of our community!.</h5>
+                </p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+
+        <h3 class="mt-3 ms-2 fs-1 text-center">Information </h3>
+        <p>
+        <h5 style="color: white;" class="ms-3">Our dedicated team is composed of scientists, health professionals, and
+          educators who share a passion for public health and science communication. With diverse expertise and
+          backgrounds, we work collaboratively to create engaging content, interactive resources, and expert insights.
+          Our commitment is to present complex scientific topics in a way that is easy to understand and relevant to
+          everyday life. </h5>
+        </p>
+
+        <!-- Three columns of text below the carousel along Pics -->
+        <div class="row">
+          <div class="col-lg-3">
+            <svg class="rounded-circle ms-5" width="150" height="150" aria-label="Placeholder: 130x130"
+              preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">130x130</text>
+              <image href="image virus/adnan.jpg" width="150" height="150" clip-path="url(#circleClip)" />
+            </svg>
+            <h2 class="ms-2">ADNAN <br> ALI</h2>
+            <p>Chief Executive Officer (CEO)</p>
+            <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-3">
+            <svg class="rounded-circle ms-5" width="150" height="150" aria-label="Placeholder: 140x140"
+              preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">130x130</text>
+              <image href="/image virus/konain raza.jpeg" width="150" height="150" clip-path="url(#circleClip)" />
+            </svg>
+            <h2 class="ms-2">KONAIN <br> RAZA</h2>
+            <p>Co-Founder & COO</p>
+            <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-3">
+            <svg class="rounded-circle ms-5" width="150" height="150" aria-label="Placeholder: 140x140"
+              preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">130x130</text>
+              <image href="image virus/shaheer shah.jpeg" width="150" height="150" clip-path="url(#circleClip)" />
+            </svg>
+            <h2 class="ms-3">SYED SHAHEER <br> SHAH</h2>
+            <p>Vice President of Operations</p>
+            <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-3">
+            <svg class="rounded-circle ms-5" width="150" height="150" aria-label="Placeholder: 140x140"
+              preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">130x130</text>
+              <image href="image virus/sami shah.jpeg" width="150" height="150" clip-path="url(#circleClip)" />
+            </svg>
+
+            <h2 class="ms-2">SYED ABDUS SAMI <br>SHAH</h2>
+            <p>Markeeting Manager</p>
+            <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+
+
+    </section>
+    </div>
+
+    <!-- Contact Us -->
+
+
+
+    <div style="background: linear-gradient(blue,rgb(183, 0, 255)); margin: 0; padding: 10px;">
+      <h1 id="contactus" class="container-fluid text-center mt-3">CONTACT US</h1>
+      <div class="row mt-2">
+        <!-- Form -->
+
+        <div class="col-6">
+          <form class="row g-3" action="https://formspree.io/f/xanynpoa" method="POST">
+
+
+            <div class="col-md-6">
+              <label for="firstname" class="form-label">First Name:*</label>
+              <input type="text" name="name" class="form-control" id="firstname" placeholder="Enter your first Name">
+            </div>
+            <div class="col-md-6">
+              <label for="lastname" class="form-label">Last Name:*</label>
+              <input type="text" name="name" class="form-control" id="lastname" placeholder="Enter your last Name">
+            </div>
+            <div class="col-md-6">
+              <label for="inputEmail4" class="form-label">Email:*</label>
+              <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Enter your Email">
+            </div>
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Phone (Optional):</label>
+              <input type="tel" name="phone" class="form-control" id="phone" placeholder="Enter your phone number">
+            </div>
+            <div class="col-12">
+              <label for="inputAddress" class="form-label">Address</label>
+              <input type="text" name="Address" class="form-control" id="inputAddress" placeholder="Enter your Address">
+            </div>
+            <div class="col-12">
+              <label for="inputAddress2" class="form-label">Address 2</label>
+              <input type="text" name="Address" class="form-control" id="inputAddress2"
+                placeholder="Enter your office Address">
+            </div>
+            <div class="col-md-6">
+              <label for="inputCity" class="form-label">City</label>
+              <input type="text" name="text" class="form-control" id="inputCity">
+            </div>
+            <div class="col-md-4">
+              <label for="inputState" class="form-label">State</label>
+              <select style="height:50px ;" id="inputState" class="form-select">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="inputZip" class="form-label">Zip</label>
+              <input type="text" name="number" class="form-control" id="inputZip">
+            </div>
+            <div class="col-md-12">
+              <label for="entermessage" class="form-label">FeedBack</label>
+
+              <textarea name="message" id="entermessage" class="form-control"></textarea>
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" name="checkbox" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  Check me out
+                </label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+          </form>
+
+        </div>
+        <!--Text Form -->
+        <div class="col-6 mt-4">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.902629269451!2d67.02166607544613!3d24.86717497792487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e6b1566c46f%3A0x65318f4eb62c7aa8!2sAptech%20Computer%20Education%20Garden%20Center!5e0!3m2!1sen!2s!4v1729348517013!5m2!1sen!2s"
+            width="750" height="552" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </header>
+  <main></main>
+  <footer>
+
+
+    <!-- ending point -->
+    <main style="background: linear-gradient(blue,red);">
+      <div class="container-fluid">
+        <footer class="py-5">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-2">
+              <h5 class="ms-5">Section</h5>
+              <ul class="nav flex-column ms-5" style="color:white;">
+                <li class="nav-item mb-2 fw-bold"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2 fw-bold"><a href="#" class="nav-link p-0 text-muted">Contact us</a></li>
+                <li class="nav-item mb-2 fw-bold"><a href="#" class="nav-link p-0 text-muted">Type of Virus</a></li>
+                <li class="nav-item mb-2 fw-bold"><a href="#" class="nav-link p-0 text-muted">Year Wise List</a></li>
+                <li class="nav-item mb-2 fw-bold"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+
+
+
+            <div class="col-4 offset-1">
+              <form style="height: 100px; margin: 0; padding: 5px;">
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of whats new and exciting from us.</p>
+                <div class="d-flex w-100 gap-2">
+                  <label for="newsletter1" class="visually-hidden">Email address</label>
+                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                  <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between" style="height: 100px; margin: 0; padding:0px;">
+            <p>© 2021 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                    <use xlink:href="#twitter"></use>
+                  </svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                    <use xlink:href="#instagram"></use>
+                  </svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                    <use xlink:href="#facebook"></use>
+                  </svg></a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+    </main>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"></script>
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="/jquery-ui-1.14.0.custom/jquery-ui.js"></script>
+    <script src="/jquery-ui-1.14.0.custom/jquery-ui.min.js"></script>
+
+    <script>
+      let virus = ["Influenza", "Herpesviruses", "Coronavirus", "Oncoviruses", "papillomaviruses", "Enteroviruses", "Flaviviruses", "Orthopoxviruses", "Hepatitis"]
+      $("#virus").autocomplete({
+        source: virus,
+      })
+      function func() {
+        let page = document.getElementById("virus").value;
+        if (page == "Coronavirus") {
+          window.location.href = "#covid"
+        }
+        else if (page == "Orthopoxviruses") {
+          window.location.href = "#ortho"
+        }
+        else if (page == "Herpesviruses") {
+          window.location.href = "#herpe"
+        }
+        else if (page == "Oncoviruses") {
+          window.location.href = "#onco"
+        }
+        else if (page == "Enteroviruses") {
+          window.location.href = "#enter"
+        } else {
+
+        }
+      }
+    </script>
+</body>
+
+</html>
